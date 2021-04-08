@@ -1,0 +1,47 @@
+﻿@model AlkemyChallenge.Models.ViewModels.DataTeacher
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Teacher", FormMethod.Post))
+{
+    string Usuario = User.Identity.Name;
+    if (Usuario == "Administrador")
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    @Html.LabelFor(d => d.First_Name)
+                    @Html.TextBoxFor(d => d.First_Name, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.First_Name, null)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.Last_Name)
+                    @Html.TextBoxFor(d => d.Last_Name, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.Last_Name, null)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.DNI)
+                    @Html.TextBoxFor(d => d.DNI, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.DNI, null)
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.File_Teacher)
+                    @Html.TextBoxFor(d => d.File_Teacher, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.File_Teacher, null)
+                </div>
+                <div style="text-align:right">
+                    <input value="Guardar" class="btn btn-success" type="Submit" />
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <label> NO TIENE LOS PERMISOS NECESARIOS</label>
+        <a class="btn btn-danger" href="~/Matter">Volver</a>
+
+    }
+}

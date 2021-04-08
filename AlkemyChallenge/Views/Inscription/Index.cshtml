@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Inscripción";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div class="container">
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-warning">@ViewBag.Message</div>
+        }
+    }
+</div>
+<div class="container">
+    <a class="btn btn-success" href="~/Matter">Volver</a>
+    </div>

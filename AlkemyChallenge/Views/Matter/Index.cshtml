@@ -1,0 +1,65 @@
+﻿@model List<AlkemyChallenge.Models.ViewModels.ListMatters>
+@{
+    ViewBag.Title = "Lista Materias";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row" style="text-align:right;padding:5px">
+    @if (User.Identity.IsAuthenticated)
+    {
+        string Usuario = User.Identity.Name;
+        if (Usuario == "Administrador")
+        {
+            <a href="~/Matter/New" class="btn btn-success">Nueva Materia</a>
+        }
+    }
+
+</div>
+<div class="row" style="text-align:right;padding:5px">
+    <div class="container">
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="alert alert-danger">@ViewBag.Message</div>
+            }
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Materia</th>
+                <th>Inicio</th>
+                <th>Profesor</th>
+                <th>Cupo</th>
+                <th></th>
+            </tr>
+            @foreach (var Omatter in Model)
+            {
+                <tr>
+
+                    <td>@Omatter.Name_Matter</td>
+                    <td>@Omatter.Schedule</td>
+                    <td><a class="btn btn-primary" href="~/Teacher/ViewTeacher/@Omatter.Teacher">Ver Profesor</a></td>
+                    <td>@Omatter.Quota</td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            string Usuario = User.Identity.Name;
+                            if (Usuario == "Administrador")
+                            {
+                                <a class="btn btn-default" href="~/Matter/Edit/@Omatter.Id">Editar</a>
+                                <a class="btn btn-danger" href="~/Matter/Delete/@Omatter.Id">Eliminar</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success" href="~/Inscription/Inscription/@Omatter.Id">Inscribirse</a>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
